@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import { getPillarColors } from '../lib/pillar-colors';
 
 const allArticles = await getCollection('articles');
 ---
@@ -15,9 +16,16 @@ const allArticles = await getCollection('articles');
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       {allArticles.map((entry) => (
         <a href={`/view/${entry.slug}`} class="group relative border border-neutral-800 bg-neutral-900/30 rounded-lg overflow-hidden hover:border-blue-500 transition-all block h-full flex flex-col">
-          {entry.data.mediaUrl && (
-            <div class="h-48 overflow-hidden">
+          {entry.data.mediaUrl ? (
+            <div class="h-40 overflow-hidden">
               <img src={entry.data.mediaUrl} class="w-full h-full object-cover opacity-60 group-hover:opacity-90 group-hover:scale-105 transition-all duration-500" />
+            </div>
+          ) : (
+            <div class={`h-28 bg-gradient-to-br ${getPillarColors(entry.data.pillar).from} ${getPillarColors(entry.data.pillar).to} flex items-center justify-center relative overflow-hidden`}>
+              <span class={`text-5xl opacity-20 group-hover:opacity-40 transition-opacity font-serif select-none ${getPillarColors(entry.data.pillar).accent}`}>
+                {getPillarColors(entry.data.pillar).glyph}
+              </span>
+              <div class="absolute bottom-2 right-3 text-[8px] font-mono opacity-30 uppercase tracking-widest">{entry.data.format}</div>
             </div>
           )}
           <div class="p-5 flex flex-col flex-1">
