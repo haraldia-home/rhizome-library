@@ -1,0 +1,58 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  const allTags = [...new Set(articles.flatMap((entry) => entry.data.tags))];
+  return allTags.map((tag) => ({
+    params: { tag },
+    props: {
+      tag,
+      articles: articles.filter((entry) =>
+        entry.data.tags.some((t) => t.toLowerCase() === tag.toLowerCase())
+      ),
+    },
+  }));
+}
+
+const { tag, articles } = Astro.props;
+---
+
+<Layout title={`#${tag} — The Living Library`}>
+  <div class="min-h-screen p-8 md:p-12 animate-in">
+    <header class="mb-12">
+      <span class="text-[10px] font-mono text-green-500 uppercase tracking-[0.3em] block mb-2">&gt; TOPICS / NODE</span>
+      <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight">#{tag}</h1>
+      <p class="text-neutral-500 font-mono text-xs mt-2">{articles.length} artifact{articles.length !== 1 ? 's' : ''} connected</p>
+    </header>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {articles.map((entry) => (
+        <a href={`/view/${entry.slug}`} class="group block border border-neutral-800 bg-neutral-900/20 p-6 rounded hover:border-blue-500 transition-all">
+          <span class={`text-[9px] uppercase font-mono px-2 py-0.5 rounded border w-fit mb-3 inline-block ${
+            entry.data.format === 'code' ? 'text-green-400 border-green-900 bg-green-900/10' :
+            entry.data.format === 'poetry' ? 'text-pink-400 border-pink-900 bg-pink-900/10' :
+            entry.data.format === 'course' ? 'text-blue-400 border-blue-900 bg-blue-900/10' :
+            'text-neutral-400 border-neutral-800'
+          }`}>
+            {entry.data.format}
+          </span>
+          <h2 class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors mb-2">{entry.data.title}</h2>
+          <p class="text-sm text-neutral-400 font-serif italic">{entry.data.commentary}</p>
+          <div class="flex flex-wrap gap-1 mt-4">
+            {entry.data.tags.map((t) => (
+              <span class="text-[9px] font-mono text-neutral-600 border border-neutral-800 px-1.5 py-0.5 rounded">#{t}</span>
+            ))}
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="mt-12">
+      <a href="/prompts" class="text-[10px] font-mono text-neutral-500 hover:text-white transition-colors uppercase tracking-widest">
+        ← Back to Gallery
+      </a>
+    </div>
+  </div>
+</Layout>

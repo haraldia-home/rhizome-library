@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allArticles = await getCollection('articles');
+---
+
+<Layout title="Syntax Gallery — The Living Library">
+  <div class="min-h-screen p-8 md:p-12 animate-in">
+    <header class="mb-12">
+      <span class="text-[10px] font-mono text-green-500 uppercase tracking-[0.3em] block mb-2">&gt; GALLERY / ALL ARTIFACTS</span>
+      <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight">Syntax Gallery</h1>
+    </header>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {allArticles.map((entry) => (
+        <a href={`/view/${entry.slug}`} class="group relative border border-neutral-800 bg-neutral-900/30 rounded-lg overflow-hidden hover:border-blue-500 transition-all block h-full flex flex-col">
+          {entry.data.mediaUrl && (
+            <div class="h-48 overflow-hidden">
+              <img src={entry.data.mediaUrl} class="w-full h-full object-cover opacity-60 group-hover:opacity-90 group-hover:scale-105 transition-all duration-500" />
+            </div>
+          )}
+          <div class="p-5 flex flex-col flex-1">
+            <span class={`text-[9px] uppercase font-mono px-2 py-0.5 rounded border w-fit mb-3 ${
+              entry.data.format === 'code' ? 'text-green-400 border-green-900 bg-green-900/10' :
+              entry.data.format === 'poetry' ? 'text-pink-400 border-pink-900 bg-pink-900/10' :
+              entry.data.format === 'course' ? 'text-blue-400 border-blue-900 bg-blue-900/10' :
+              entry.data.format === 'media' ? 'text-purple-400 border-purple-900 bg-purple-900/10' :
+              'text-neutral-400 border-neutral-800'
+            }`}>
+              {entry.data.format}
+            </span>
+            <h2 class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors mb-2">{entry.data.title}</h2>
+            <p class="text-xs text-neutral-500 font-mono mb-3">{entry.data.pillar}</p>
+            <p class="text-sm text-neutral-400 font-serif italic flex-1">{entry.data.commentary}</p>
+            <div class="flex flex-wrap gap-1 mt-4">
+              {entry.data.tags.map((tag) => (
+                <span class="text-[9px] font-mono text-neutral-600 border border-neutral-800 px-1.5 py-0.5 rounded">#{tag}</span>
+              ))}
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</Layout>

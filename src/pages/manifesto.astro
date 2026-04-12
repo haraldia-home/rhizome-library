@@ -1,0 +1,65 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="The Manifesto — The Living Library">
+  <div class="min-h-screen p-8 md:p-12 animate-in max-w-4xl mx-auto">
+
+    <header class="mb-16 text-center">
+      <span class="text-[10px] font-mono text-green-500 uppercase tracking-[0.3em] block mb-4">&gt; MANIFESTO / v1.0</span>
+      <h1 class="text-5xl md:text-7xl font-serif font-bold text-white tracking-tight leading-none">The Living<br/>Library</h1>
+    </header>
+
+    <!-- HOOK -->
+    <section class="mb-20">
+      <p class="text-2xl md:text-3xl font-serif text-neutral-300 leading-relaxed text-center italic">
+        We are drowning in noise. The feeds are infinite, the dopamine is cheap, and the signal is buried beneath an avalanche of engagement-optimized nothing.
+      </p>
+      <p class="text-lg font-serif text-neutral-400 leading-relaxed mt-8 text-center">
+        This library is a revolt. A curated rhizome of ideas that refuse to be compressed into a tweet.
+      </p>
+    </section>
+
+    <!-- THREE PILLARS -->
+    <section class="space-y-16 mb-20">
+      <div class="group border border-neutral-800 p-8 md:p-12 hover:border-blue-500 transition-all">
+        <div class="flex items-baseline gap-4 mb-6">
+          <span class="text-6xl font-bold text-neutral-800 group-hover:text-blue-500/50 font-serif transition-colors">01</span>
+          <h2 class="text-3xl font-bold text-white">Science &amp; Rationality</h2>
+        </div>
+        <p class="text-neutral-400 font-serif text-lg leading-relaxed">
+          The universe does not owe you an intuitive explanation. We study Physics, Mathematics, and Logic not because they are easy, but because they are the actual language of reality. No mysticism. No shortcuts.
+        </p>
+      </div>
+
+      <div class="group border border-neutral-800 p-8 md:p-12 hover:border-green-500 transition-all">
+        <div class="flex items-baseline gap-4 mb-6">
+          <span class="text-6xl font-bold text-neutral-800 group-hover:text-green-500/50 font-serif transition-colors">02</span>
+          <h2 class="text-3xl font-bold text-white">Ecosophy</h2>
+        </div>
+        <p class="text-neutral-400 font-serif text-lg leading-relaxed">
+          The forest was computing before silicon existed. Ecosophy is the philosophy that the Earth is not a resource to be managed, but an organism to be understood. We study mycelium, permaculture, and solarpunk futures.
+        </p>
+      </div>
+
+      <div class="group border border-neutral-800 p-8 md:p-12 hover:border-pink-500 transition-all">
+        <div class="flex items-baseline gap-4 mb-6">
+          <span class="text-6xl font-bold text-neutral-800 group-hover:text-pink-500/50 font-serif transition-colors">03</span>
+          <h2 class="text-3xl font-bold text-white">The Human Spirit</h2>
+        </div>
+        <p class="text-neutral-400 font-serif text-lg leading-relaxed">
+          Poetry, music, satire, absurdism — the things that make us human and cannot be reduced to an algorithm. We preserve the irrational, the beautiful, and the deliberately impractical.
+        </p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="text-center border-t border-neutral-800 pt-12">
+      <p class="text-neutral-500 font-mono text-sm mb-8">The library is alive. It grows when you contribute.</p>
+      <a href="/prompts" class="inline-block bg-white text-black font-mono text-xs px-6 py-3 hover:bg-blue-500 hover:text-white transition-colors uppercase tracking-wider">
+        Enter the Gallery →
+      </a>
+    </section>
+
+  </div>
+</Layout>
