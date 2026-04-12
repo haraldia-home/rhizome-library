@@ -5,7 +5,7 @@ import { getCollection } from 'astro:content';
 export async function getStaticPaths() {
   const articles = await getCollection('articles');
   return articles.map((entry) => ({
-    params: { slug: entry.data.slug },
+    params: { slug: entry.id },
     props: { entry },
   }));
 }
@@ -221,7 +221,7 @@ const seed = entry.data;
       </div>
 
       <div class="mt-8 pt-8 flex justify-between items-center text-[10px] font-mono text-neutral-600">
-        <span>ID: {seed.slug}</span>
+        <span>ID: {entry.id}</span>
         <a href="/prompts" class="hover:text-white transition-colors">
           [ RETURN TO ARCHIVE ]
         </a>
