@@ -20,11 +20,11 @@ const seed = entry.data;
 
     {/* --- LAYOUT 1: THE COURSE --- */}
     {seed.format === 'course' && (
-      <main class="max-w-4xl mx-auto py-20 px-6">
-        <header class="mb-12 border-l-4 border-blue-500 pl-6">
+      <main class="max-w-4xl mx-auto py-10 md:py-20 px-4 md:px-6">
+        <header class="mb-8 md:mb-12 border-l-4 border-blue-500 pl-4 md:pl-6">
           <span class="text-[10px] font-mono text-blue-500 uppercase tracking-[0.3em]">Curriculum Protocol</span>
-          <h1 class="text-5xl md:text-7xl font-bold text-white mt-2 mb-4 tracking-tighter">{seed.title}</h1>
-          <p class="text-xl text-neutral-400 font-serif italic">"{seed.commentary}"</p>
+          <h1 class="text-3xl md:text-5xl lg:text-7xl font-bold text-white mt-2 mb-4 tracking-tighter">{seed.title}</h1>
+          <p class="text-base md:text-xl text-neutral-400 font-serif italic leading-relaxed">"{seed.commentary}"</p>
         </header>
 
         <div class="grid gap-6">
@@ -67,15 +67,15 @@ const seed = entry.data;
     {seed.format === 'surrealism' && (
       <main class="min-h-screen flex flex-col items-center justify-center p-6 relative overflow-hidden bg-white text-black">
         <div class="absolute inset-0 overflow-hidden opacity-5 pointer-events-none select-none">
-          <h1 class="text-[20vw] font-bold leading-none -ml-20">ABSURD</h1>
-          <h1 class="text-[20vw] font-bold leading-none ml-20">REALITY</h1>
+          <h1 class="text-[15vw] md:text-[20vw] font-bold leading-none -ml-10 md:-ml-20">ABSURD</h1>
+          <h1 class="text-[15vw] md:text-[20vw] font-bold leading-none ml-10 md:ml-20">REALITY</h1>
         </div>
 
         <div class="z-10 max-w-2xl text-center">
           <span class="bg-black text-white px-2 py-1 text-xs font-mono uppercase transform -rotate-3 inline-block mb-8">
             {seed.pillar}
           </span>
-          <h1 class="text-6xl md:text-8xl font-serif font-black mb-8 hover:italic transition-all cursor-help glitch-hover">
+          <h1 class="text-4xl md:text-6xl lg:text-8xl font-serif font-black mb-8 hover:italic transition-all cursor-help glitch-hover">
             {seed.title}
           </h1>
           {seed.mediaUrl && (
@@ -83,7 +83,7 @@ const seed = entry.data;
               <img src={seed.mediaUrl} class="max-w-md w-full shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] border-2 border-black filter contrast-125" />
             </div>
           )}
-          <div class="text-2xl font-serif leading-relaxed border-t-2 border-black pt-8 mt-8 prose prose-lg max-w-none">
+          <div class="text-lg md:text-2xl font-serif leading-relaxed border-t-2 border-black pt-8 mt-8 prose prose-lg max-w-none">
             <Content />
           </div>
           <p class="text-xs font-mono mt-12 text-neutral-500">
@@ -95,11 +95,11 @@ const seed = entry.data;
 
     {/* --- LAYOUT 3: POETRY --- */}
     {seed.format === 'poetry' && (
-      <main class="max-w-2xl mx-auto py-24 px-6 text-center">
+      <main class="max-w-2xl mx-auto py-12 md:py-24 px-4 md:px-6 text-center">
         <span class="text-[10px] font-mono text-blue-500 mb-8 block tracking-widest uppercase border border-blue-900/30 inline-block px-3 py-1 rounded-full">
           {seed.pillar} // Poetic Node
         </span>
-        <h1 class="text-4xl md:text-6xl font-serif font-bold mb-16 italic text-white leading-tight">
+        <h1 class="text-3xl md:text-4xl lg:text-6xl font-serif font-bold mb-10 md:mb-16 italic text-white leading-tight">
           {seed.title}
         </h1>
         <div class="font-serif text-lg md:text-2xl leading-relaxed whitespace-pre-line text-neutral-300 italic border-l-2 border-neutral-800 pl-6 md:border-none md:pl-0 prose prose-invert prose-lg max-w-none">
@@ -113,14 +113,14 @@ const seed = entry.data;
 
     {/* --- LAYOUT 4: ESSAY / SATIRE --- */}
     {(seed.format === 'essay' || seed.format === 'satire') && (
-      <main class="max-w-3xl mx-auto py-16 px-6">
-        <header class="border-b-4 border-white/10 mb-12 pb-6">
+      <main class="max-w-3xl mx-auto py-10 md:py-16 px-4 md:px-6">
+        <header class="border-b-4 border-white/10 mb-8 md:mb-12 pb-6">
           <div class="flex justify-between items-end mb-4">
             <span class="bg-white text-black font-bold px-2 py-1 text-[10px] uppercase tracking-tighter">THE DAILY RHIZOME</span>
             <span class="font-mono text-[10px] text-neutral-500">{seed.date}</span>
           </div>
-          <h1 class="text-4xl md:text-6xl font-bold text-white leading-none tracking-tight mb-6">{seed.title}</h1>
-          <p class="text-xl text-neutral-400 font-serif italic pl-6 border-l-2 border-blue-500">"{seed.commentary}"</p>
+          <h1 class="text-3xl md:text-4xl lg:text-6xl font-bold text-white leading-none tracking-tight mb-4 md:mb-6">{seed.title}</h1>
+          <p class="text-base md:text-xl text-neutral-400 font-serif italic pl-4 md:pl-6 border-l-2 border-blue-500 leading-relaxed">"{seed.commentary}"</p>
         </header>
 
         {seed.mediaUrl && (
@@ -189,8 +189,8 @@ const seed = entry.data;
               <div class="bg-white text-black rounded-full w-20 h-20 flex items-center justify-center pl-1 hover:scale-110 transition-transform">▶</div>
             </div>
           </div>
-          <h1 class="text-5xl font-bold text-white mb-4 tracking-tight">{seed.title}</h1>
-          <p class="text-blue-400 font-mono text-xs tracking-[0.2em] uppercase mb-12">{seed.pillar}</p>
+          <h1 class="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">{seed.title}</h1>
+          <p class="text-blue-400 font-mono text-xs tracking-[0.2em] uppercase mb-8 md:mb-12">{seed.pillar}</p>
           <div class="w-full h-1 bg-neutral-700 rounded-full overflow-hidden mb-4">
             <div class="w-1/3 h-full bg-white"></div>
           </div>
@@ -204,11 +204,11 @@ const seed = entry.data;
 
     {/* --- LAYOUT 7: MANIFESTO --- */}
     {seed.format === 'manifesto' && (
-      <main class="max-w-3xl mx-auto py-20 px-6">
-        <header class="mb-16 text-center border-b-2 border-red-500/30 pb-12">
-          <span class="text-[10px] font-mono text-red-500 uppercase tracking-[0.4em] block mb-6">Declaration</span>
-          <h1 class="text-5xl md:text-7xl font-serif font-black text-white leading-none tracking-tight mb-8">{seed.title}</h1>
-          <p class="text-xl text-neutral-400 font-serif italic max-w-xl mx-auto">"{seed.commentary}"</p>
+      <main class="max-w-3xl mx-auto py-10 md:py-20 px-4 md:px-6">
+        <header class="mb-10 md:mb-16 text-center border-b-2 border-red-500/30 pb-8 md:pb-12">
+          <span class="text-[10px] font-mono text-red-500 uppercase tracking-[0.4em] block mb-4 md:mb-6">Declaration</span>
+          <h1 class="text-3xl md:text-5xl lg:text-7xl font-serif font-black text-white leading-none tracking-tight mb-6 md:mb-8">{seed.title}</h1>
+          <p class="text-base md:text-xl text-neutral-400 font-serif italic max-w-xl mx-auto leading-relaxed">"{seed.commentary}"</p>
         </header>
         {seed.mediaUrl && (
           <div class="mb-12 relative group">
@@ -223,11 +223,11 @@ const seed = entry.data;
 
     {/* --- LAYOUT 8: THEOREM --- */}
     {seed.format === 'theorem' && (
-      <main class="max-w-3xl mx-auto py-20 px-6">
-        <header class="mb-12 border-l-4 border-amber-500 pl-6">
+      <main class="max-w-3xl mx-auto py-10 md:py-20 px-4 md:px-6">
+        <header class="mb-8 md:mb-12 border-l-4 border-amber-500 pl-4 md:pl-6">
           <span class="text-[10px] font-mono text-amber-500 uppercase tracking-[0.3em]">Formal Argument</span>
-          <h1 class="text-4xl md:text-6xl font-bold text-white mt-2 mb-4 tracking-tighter">{seed.title}</h1>
-          <p class="text-lg text-neutral-400 font-serif italic">"{seed.commentary}"</p>
+          <h1 class="text-2xl md:text-4xl lg:text-6xl font-bold text-white mt-2 mb-4 tracking-tighter">{seed.title}</h1>
+          <p class="text-base md:text-lg text-neutral-400 font-serif italic leading-relaxed">"{seed.commentary}"</p>
         </header>
         <article class="prose prose-invert prose-lg text-neutral-300 max-w-none [&>h2]:font-mono [&>h2]:text-xs [&>h2]:uppercase [&>h2]:tracking-widest [&>h2]:text-amber-500 [&>h2]:mt-16 [&>h2]:mb-6 [&>blockquote]:border-l-amber-500/50 [&>blockquote]:text-amber-200/80 [&>blockquote]:font-mono [&>blockquote]:text-sm [&>hr]:border-neutral-800 [&>p>strong]:text-white">
           <Content />
@@ -237,7 +237,7 @@ const seed = entry.data;
 
     {/* --- LAYOUT 9: CHRONICLE --- */}
     {seed.format === 'chronicle' && (
-      <main class="max-w-3xl mx-auto py-16 px-6">
+      <main class="max-w-3xl mx-auto py-10 md:py-16 px-4 md:px-6">
         <header class="border-b-4 border-white/10 mb-12 pb-6">
           <div class="flex justify-between items-end mb-4">
             <span class="bg-neutral-800 text-neutral-300 font-bold px-2 py-1 text-[10px] uppercase tracking-tighter">Chronicle</span>
@@ -259,11 +259,11 @@ const seed = entry.data;
 
     {/* --- LAYOUT 10: DIALOGUE --- */}
     {seed.format === 'dialogue' && (
-      <main class="max-w-3xl mx-auto py-20 px-6">
-        <header class="mb-12 text-center">
-          <span class="text-[10px] font-mono text-purple-500 uppercase tracking-[0.4em] block mb-6">Dialectical Exchange</span>
-          <h1 class="text-4xl md:text-6xl font-serif font-bold text-white mb-6 leading-tight">{seed.title}</h1>
-          <p class="text-lg text-neutral-400 font-serif italic">"{seed.commentary}"</p>
+      <main class="max-w-3xl mx-auto py-10 md:py-20 px-4 md:px-6">
+        <header class="mb-8 md:mb-12 text-center">
+          <span class="text-[10px] font-mono text-purple-500 uppercase tracking-[0.4em] block mb-4 md:mb-6">Dialectical Exchange</span>
+          <h1 class="text-3xl md:text-4xl lg:text-6xl font-serif font-bold text-white mb-4 md:mb-6 leading-tight">{seed.title}</h1>
+          <p class="text-base md:text-lg text-neutral-400 font-serif italic leading-relaxed">"{seed.commentary}"</p>
         </header>
         <article class="prose prose-invert prose-lg text-neutral-300 max-w-none [&>h2]:font-mono [&>h2]:text-sm [&>h2]:uppercase [&>h2]:tracking-widest [&>h2]:text-purple-400 [&>h2]:mt-14 [&>h2]:mb-6 [&>h3]:text-white [&>h3]:font-serif [&>blockquote]:border-l-purple-500/50 [&>blockquote]:text-purple-200/80 [&>hr]:border-neutral-800">
           <Content />
@@ -273,11 +273,11 @@ const seed = entry.data;
 
     {/* --- LAYOUT 11: TREATISE --- */}
     {seed.format === 'treatise' && (
-      <main class="max-w-4xl mx-auto py-20 px-6">
-        <header class="mb-16 border-b border-neutral-800 pb-8">
+      <main class="max-w-4xl mx-auto py-10 md:py-20 px-4 md:px-6">
+        <header class="mb-10 md:mb-16 border-b border-neutral-800 pb-6 md:pb-8">
           <span class="text-[10px] font-mono text-cyan-500 uppercase tracking-[0.3em] block mb-4">{seed.pillar} — Treatise</span>
-          <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight">{seed.title}</h1>
-          <p class="text-lg text-neutral-400 font-serif italic">"{seed.commentary}"</p>
+          <h1 class="text-2xl md:text-4xl lg:text-6xl font-bold text-white mb-4 tracking-tight">{seed.title}</h1>
+          <p class="text-base md:text-lg text-neutral-400 font-serif italic leading-relaxed">"{seed.commentary}"</p>
         </header>
         {seed.mediaUrl && (
           <div class="mb-12 relative group">

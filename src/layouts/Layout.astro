@@ -45,7 +45,7 @@ const searchData = allArticles.map((entry) => ({
       .font-mono { font-family: var(--font-mono); }
     </style>
   </head>
-  <body class="bg-neutral-950 text-neutral-200 min-h-screen flex flex-col md:flex-row font-sans selection:bg-blue-500 selection:text-white">
+  <body class="bg-neutral-950 text-neutral-200 min-h-screen font-sans selection:bg-blue-500 selection:text-white">
 
     <!-- NOISE OVERLAY -->
     <div class="noise-overlay"></div>
@@ -53,79 +53,230 @@ const searchData = allArticles.map((entry) => ({
     <!-- COMMAND MENU (React, interactive) -->
     <CommandMenu client:load searchData={searchData} />
 
-    <!-- CUSTOM CURSOR (React, interactive) -->
+    <!-- CUSTOM CURSOR (hidden on touch devices via CSS) -->
     <Cursor client:load />
 
-    <!-- SIDEBAR -->
-    <aside class="w-full md:w-64 border-r border-neutral-800 p-6 flex flex-col h-auto md:h-screen sticky top-0 bg-neutral-950/80 backdrop-blur-md z-50">
-      <div class="mb-8 pt-2">
-        <h1 class="font-serif text-2xl font-bold text-white tracking-tighter leading-none">
-          LIVING<br />LIBRARY
-        </h1>
-        <div class="flex items-center gap-2 mt-3">
-          <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
-          <p class="text-[9px] font-mono text-neutral-500 uppercase tracking-widest">System Online</p>
+    <!-- ========== MOBILE TOP BAR (< md) ========== -->
+    <header class="md:hidden fixed top-0 left-0 right-0 z-50 bg-neutral-950/95 backdrop-blur-md border-b border-neutral-800">
+      <div class="flex items-center justify-between px-4 py-3">
+        <a href="/" class="font-serif text-lg font-bold text-white tracking-tighter leading-none">
+          LIVING LIBRARY
+        </a>
+        <div class="flex items-center gap-3">
+          <div class="flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+            <span class="text-[8px] font-mono text-neutral-500 uppercase">Online</span>
+          </div>
+          <button
+            id="mobile-menu-btn"
+            class="w-9 h-9 flex flex-col items-center justify-center gap-1.5 rounded border border-neutral-800 bg-neutral-900 hover:border-neutral-600 transition-colors"
+            aria-label="Toggle menu"
+          >
+            <span id="burger-top" class="block w-4 h-px bg-neutral-400 transition-all duration-300"></span>
+            <span id="burger-mid" class="block w-4 h-px bg-neutral-400 transition-all duration-300"></span>
+            <span id="burger-bot" class="block w-4 h-px bg-neutral-400 transition-all duration-300"></span>
+          </button>
         </div>
       </div>
+    </header>
 
-      <!-- SEARCH BUTTON -->
-      <div class="mb-8">
-        <button
-          class="w-full bg-neutral-900 border border-neutral-800 text-neutral-500 text-[10px] font-mono py-2 rounded flex justify-between px-3 hover:border-neutral-600 hover:text-white transition-colors group text-left"
-        >
-          <span>SEARCH...</span>
-          <span class="bg-neutral-800 px-1.5 py-0.5 rounded text-neutral-400 group-hover:text-white border border-neutral-700">Ctrl K</span>
-        </button>
+    <!-- ========== MOBILE SLIDE-OUT MENU ========== -->
+    <div
+      id="mobile-menu-overlay"
+      class="md:hidden fixed inset-0 z-[60] bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300"
+    ></div>
+    <nav
+      id="mobile-menu-panel"
+      class="md:hidden fixed top-0 right-0 z-[70] w-72 h-full bg-neutral-950 border-l border-neutral-800 translate-x-full transition-transform duration-300 ease-out overflow-y-auto"
+    >
+      <div class="p-6 pt-5">
+        <div class="flex items-center justify-between mb-8">
+          <span class="font-serif text-lg font-bold text-white tracking-tighter">Menu</span>
+          <button id="mobile-menu-close" class="text-neutral-500 hover:text-white transition-colors text-xs font-mono border border-neutral-800 px-2 py-1 rounded" aria-label="Close menu">
+            ESC
+          </button>
+        </div>
+
+        <!-- Mobile Search hint -->
+        <div class="mb-8">
+          <button
+            class="w-full bg-neutral-900 border border-neutral-800 text-neutral-500 text-[10px] font-mono py-2.5 rounded flex justify-between px-3 hover:border-neutral-600 hover:text-white transition-colors group text-left"
+          >
+            <span>SEARCH...</span>
+            <span class="bg-neutral-800 px-1.5 py-0.5 rounded text-neutral-400 border border-neutral-700 text-[9px]">Ctrl K</span>
+          </button>
+        </div>
+
+        <div class="space-y-8 font-mono text-sm">
+          <!-- The Lab -->
+          <div>
+            <div class="text-neutral-600 text-[9px] uppercase tracking-widest mb-3 font-bold flex items-center gap-2">
+              <span>The Lab</span>
+              <span class="h-px bg-neutral-800 flex-1"></span>
+            </div>
+            <a href="/" class="block py-2.5 hover:text-white transition-colors pl-3 border-l border-transparent hover:border-green-500 text-neutral-400 text-xs">Dashboard</a>
+            <a href="/prompts" class="block py-2.5 hover:text-white transition-colors pl-3 border-l border-transparent hover:border-blue-500 text-neutral-400 text-xs">Syntax Gallery</a>
+            <div class="pl-3 mt-2">
+              <RandomButton client:load slugs={searchData.map((s) => s.slug)} />
+            </div>
+          </div>
+
+          <!-- The Pillars -->
+          <div>
+            <div class="text-neutral-600 text-[9px] uppercase tracking-widest mb-3 font-bold flex items-center gap-2">
+              <span>The Pillars</span>
+              <span class="h-px bg-neutral-800 flex-1"></span>
+            </div>
+            <a href="/prompts" class="block py-2 text-neutral-500 hover:text-white pl-3 text-xs">Rationality</a>
+            <a href="/prompts" class="block py-2 text-neutral-500 hover:text-white pl-3 text-xs">Ecosophy</a>
+            <a href="/prompts" class="block py-2 text-neutral-500 hover:text-white pl-3 text-xs">Humanity</a>
+            <a href="/prompts" class="block py-2 text-neutral-500 hover:text-white pl-3 text-xs">Food Culture</a>
+          </div>
+
+          <!-- Deep Storage -->
+          <div>
+            <div class="text-neutral-600 text-[9px] uppercase tracking-widest mb-3 font-bold flex items-center gap-2">
+              <span>Deep Storage</span>
+              <span class="h-px bg-neutral-800 flex-1"></span>
+            </div>
+            <a href="/manifesto" class="block py-2 text-neutral-500 hover:text-white pl-3 text-xs">The Manifesto</a>
+            <a href="/ideas" class="block py-2 text-neutral-500 hover:text-white pl-3 text-xs">Ideas Timeline</a>
+          </div>
+        </div>
+
+        <div class="pt-6 border-t border-neutral-800 mt-8">
+          <div class="text-[9px] text-neutral-600 font-mono flex justify-between">
+            <span>LATENCY: 12ms</span>
+            <span>LOC: NORWAY</span>
+          </div>
+        </div>
       </div>
+    </nav>
 
-      <nav class="space-y-10 font-mono text-sm flex-1 overflow-y-auto">
-        <!-- The Lab -->
-        <div>
-          <div class="text-neutral-600 text-[9px] uppercase tracking-widest mb-4 font-bold flex items-center gap-2">
-            <span>The Lab</span>
-            <span class="h-px bg-neutral-800 flex-1"></span>
-          </div>
-          <a href="/" class="block py-2 hover:text-white transition-colors pl-3 border-l border-transparent hover:border-green-500 text-neutral-400 text-xs">Dashboard</a>
-          <a href="/prompts" class="block py-2 hover:text-white transition-colors pl-3 border-l border-transparent hover:border-blue-500 text-neutral-400 text-xs">Syntax Gallery</a>
-          <div class="pl-3 mt-2">
-            <RandomButton client:load slugs={searchData.map((s) => s.slug)} />
+    <div class="flex flex-col md:flex-row min-h-screen">
+      <!-- ========== DESKTOP SIDEBAR (≥ md) ========== -->
+      <aside class="hidden md:flex md:w-64 border-r border-neutral-800 p-6 flex-col h-screen sticky top-0 bg-neutral-950/80 backdrop-blur-md z-40 shrink-0">
+        <div class="mb-8 pt-2">
+          <h1 class="font-serif text-2xl font-bold text-white tracking-tighter leading-none">
+            LIVING<br />LIBRARY
+          </h1>
+          <div class="flex items-center gap-2 mt-3">
+            <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+            <p class="text-[9px] font-mono text-neutral-500 uppercase tracking-widest">System Online</p>
           </div>
         </div>
 
-        <!-- The Pillars -->
-        <div>
-          <div class="text-neutral-600 text-[9px] uppercase tracking-widest mb-4 font-bold flex items-center gap-2">
-            <span>The Pillars</span>
-            <span class="h-px bg-neutral-800 flex-1"></span>
+        <!-- SEARCH BUTTON -->
+        <div class="mb-8">
+          <button
+            class="w-full bg-neutral-900 border border-neutral-800 text-neutral-500 text-[10px] font-mono py-2 rounded flex justify-between px-3 hover:border-neutral-600 hover:text-white transition-colors group text-left"
+          >
+            <span>SEARCH...</span>
+            <span class="bg-neutral-800 px-1.5 py-0.5 rounded text-neutral-400 group-hover:text-white border border-neutral-700">Ctrl K</span>
+          </button>
+        </div>
+
+        <nav class="space-y-10 font-mono text-sm flex-1 overflow-y-auto">
+          <!-- The Lab -->
+          <div>
+            <div class="text-neutral-600 text-[9px] uppercase tracking-widest mb-4 font-bold flex items-center gap-2">
+              <span>The Lab</span>
+              <span class="h-px bg-neutral-800 flex-1"></span>
+            </div>
+            <a href="/" class="block py-2 hover:text-white transition-colors pl-3 border-l border-transparent hover:border-green-500 text-neutral-400 text-xs">Dashboard</a>
+            <a href="/prompts" class="block py-2 hover:text-white transition-colors pl-3 border-l border-transparent hover:border-blue-500 text-neutral-400 text-xs">Syntax Gallery</a>
+            <div class="pl-3 mt-2">
+              <RandomButton client:load slugs={searchData.map((s) => s.slug)} />
+            </div>
           </div>
-          <a href="/prompts" class="block py-1.5 text-neutral-500 hover:text-white pl-3 text-xs">Rationality</a>
-          <a href="/prompts" class="block py-1.5 text-neutral-500 hover:text-white pl-3 text-xs">Ecosophy</a>
-          <a href="/prompts" class="block py-1.5 text-neutral-500 hover:text-white pl-3 text-xs">Humanity</a>
-          <a href="/prompts" class="block py-1.5 text-neutral-500 hover:text-white pl-3 text-xs">Food Culture</a>
-        </div>
 
-        <!-- Deep Storage -->
-        <div>
-          <div class="text-neutral-600 text-[9px] uppercase tracking-widest mb-4 font-bold flex items-center gap-2">
-            <span>Deep Storage</span>
-            <span class="h-px bg-neutral-800 flex-1"></span>
+          <!-- The Pillars -->
+          <div>
+            <div class="text-neutral-600 text-[9px] uppercase tracking-widest mb-4 font-bold flex items-center gap-2">
+              <span>The Pillars</span>
+              <span class="h-px bg-neutral-800 flex-1"></span>
+            </div>
+            <a href="/prompts" class="block py-1.5 text-neutral-500 hover:text-white pl-3 text-xs">Rationality</a>
+            <a href="/prompts" class="block py-1.5 text-neutral-500 hover:text-white pl-3 text-xs">Ecosophy</a>
+            <a href="/prompts" class="block py-1.5 text-neutral-500 hover:text-white pl-3 text-xs">Humanity</a>
+            <a href="/prompts" class="block py-1.5 text-neutral-500 hover:text-white pl-3 text-xs">Food Culture</a>
           </div>
-          <a href="/manifesto" class="block py-1.5 text-neutral-500 hover:text-white pl-3 text-xs">The Manifesto</a>
-        </div>
-      </nav>
 
-      <div class="pt-6 border-t border-neutral-800 mt-auto">
-        <div class="text-[9px] text-neutral-600 font-mono flex justify-between">
-          <span>LATENCY: 12ms</span>
-          <span>LOC: NORWAY</span>
-        </div>
-      </div>
-    </aside>
+          <!-- Deep Storage -->
+          <div>
+            <div class="text-neutral-600 text-[9px] uppercase tracking-widest mb-4 font-bold flex items-center gap-2">
+              <span>Deep Storage</span>
+              <span class="h-px bg-neutral-800 flex-1"></span>
+            </div>
+            <a href="/manifesto" class="block py-1.5 text-neutral-500 hover:text-white pl-3 text-xs">The Manifesto</a>
+            <a href="/ideas" class="block py-1.5 text-neutral-500 hover:text-white pl-3 text-xs">Ideas Timeline</a>
+          </div>
+        </nav>
 
-    <!-- CONTENT -->
-    <main class="flex-1 overflow-y-auto scroll-smooth">
-      <slot />
-    </main>
+        <div class="pt-6 border-t border-neutral-800 mt-auto">
+          <div class="text-[9px] text-neutral-600 font-mono flex justify-between">
+            <span>LATENCY: 12ms</span>
+            <span>LOC: NORWAY</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ========== CONTENT ========== -->
+      <main class="flex-1 overflow-y-auto scroll-smooth pt-14 md:pt-0">
+        <slot />
+      </main>
+    </div>
+
+    <!-- ========== MOBILE MENU SCRIPT ========== -->
+    <script>
+      const btn = document.getElementById('mobile-menu-btn');
+      const closeBtn = document.getElementById('mobile-menu-close');
+      const overlay = document.getElementById('mobile-menu-overlay');
+      const panel = document.getElementById('mobile-menu-panel');
+      const burgerTop = document.getElementById('burger-top');
+      const burgerMid = document.getElementById('burger-mid');
+      const burgerBot = document.getElementById('burger-bot');
+
+      function openMenu() {
+        overlay?.classList.remove('opacity-0', 'pointer-events-none');
+        overlay?.classList.add('opacity-100', 'pointer-events-auto');
+        panel?.classList.remove('translate-x-full');
+        panel?.classList.add('translate-x-0');
+        burgerTop?.classList.add('rotate-45', 'translate-y-[4px]');
+        burgerMid?.classList.add('opacity-0');
+        burgerBot?.classList.add('-rotate-45', '-translate-y-[4px]');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMenu() {
+        overlay?.classList.add('opacity-0', 'pointer-events-none');
+        overlay?.classList.remove('opacity-100', 'pointer-events-auto');
+        panel?.classList.add('translate-x-full');
+        panel?.classList.remove('translate-x-0');
+        burgerTop?.classList.remove('rotate-45', 'translate-y-[4px]');
+        burgerMid?.classList.remove('opacity-0');
+        burgerBot?.classList.remove('-rotate-45', '-translate-y-[4px]');
+        document.body.style.overflow = '';
+      }
+
+      btn?.addEventListener('click', () => {
+        const isOpen = panel?.classList.contains('translate-x-0');
+        isOpen ? closeMenu() : openMenu();
+      });
+
+      closeBtn?.addEventListener('click', closeMenu);
+      overlay?.addEventListener('click', closeMenu);
+
+      // Close on link click inside mobile menu
+      panel?.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      // Close on Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMenu();
+      });
+    </script>
 
   </body>
 </html>

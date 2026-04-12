@@ -22,17 +22,22 @@ body {
 
 /* --- TEXTURE UPGRADES --- */
 
-/* 1. FILM GRAIN */
+/* 1. FILM GRAIN — disabled on mobile for performance */
 .noise-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
   z-index: 50;
-  opacity: 0.05;
+  opacity: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+@media (min-width: 768px) {
+  .noise-overlay {
+    opacity: 0.05;
+  }
 }
 
 /* 2. TEXT SELECTION COLOR */
@@ -51,7 +56,12 @@ body {
   animation: fadeIn 0.7s ease-out forwards;
 }
 
-/* 4. SURREALIST HOVER (Images invert on hover) */
+/* 4. HIDE CUSTOM CURSOR ON TOUCH DEVICES */
+@media (pointer: coarse) {
+  .mix-blend-difference { display: none !important; }
+}
+
+/* 5. SURREALIST HOVER (Images invert on hover) */
 .surreal-invert {
   transition: filter 0.3s ease;
 }

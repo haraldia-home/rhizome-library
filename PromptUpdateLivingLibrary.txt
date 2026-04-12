@@ -1,0 +1,13 @@
+I am adding new material to my Living Library. Please act as the Master Curator.
+
+1. Context Gathering: First, quickly scan the existing .mdx files in /src/content/articles/. Understand the current pillars (e.g., Strategic Heresy, Acoustic Archaeology), the formats, and the overarching intellectual tone of the archive.
+2. Ingestion: Now, read the new fragmented notes inside the /raw-notes/ folder. Apply the translation protocol (Norwegian to SOTA English).
+3. Synthesis & Expansion: Synthesize these new notes into cohesive artifacts.
+
+If a new note perfectly expands on an existing pillar (like 'Quantum Poetics'), write a new artifact for that pillar.
+
+If the new note is entirely unprecedented, invent a brand new pillar and format for it.
+
+You must NOT duplicate, overwrite, or delete any of the existing .mdx files.
+4. The Output: Generate the new .mdx files and save them alongside the others in /src/content/articles/.
+5. Frontmatter strictness: Ensure every new file has the exact same YAML schema as the existing files (title, date, pillar, format, commentary, tags).
