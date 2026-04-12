@@ -202,6 +202,95 @@ const seed = entry.data;
       </main>
     )}
 
+    {/* --- LAYOUT 7: MANIFESTO --- */}
+    {seed.format === 'manifesto' && (
+      <main class="max-w-3xl mx-auto py-20 px-6">
+        <header class="mb-16 text-center border-b-2 border-red-500/30 pb-12">
+          <span class="text-[10px] font-mono text-red-500 uppercase tracking-[0.4em] block mb-6">Declaration</span>
+          <h1 class="text-5xl md:text-7xl font-serif font-black text-white leading-none tracking-tight mb-8">{seed.title}</h1>
+          <p class="text-xl text-neutral-400 font-serif italic max-w-xl mx-auto">"{seed.commentary}"</p>
+        </header>
+        {seed.mediaUrl && (
+          <div class="mb-12 relative group">
+            <img src={seed.mediaUrl} class="w-full h-64 object-cover opacity-60 group-hover:opacity-90 transition-all duration-700 rounded-sm" />
+          </div>
+        )}
+        <article class="prose prose-invert prose-lg text-neutral-300 font-serif leading-loose max-w-none [&>h2]:font-mono [&>h2]:text-sm [&>h2]:uppercase [&>h2]:tracking-widest [&>h2]:text-red-500 [&>h2]:mt-16 [&>h2]:mb-6 [&>blockquote]:border-l-red-500 [&>blockquote]:text-neutral-200 [&>hr]:border-neutral-800">
+          <Content />
+        </article>
+      </main>
+    )}
+
+    {/* --- LAYOUT 8: THEOREM --- */}
+    {seed.format === 'theorem' && (
+      <main class="max-w-3xl mx-auto py-20 px-6">
+        <header class="mb-12 border-l-4 border-amber-500 pl-6">
+          <span class="text-[10px] font-mono text-amber-500 uppercase tracking-[0.3em]">Formal Argument</span>
+          <h1 class="text-4xl md:text-6xl font-bold text-white mt-2 mb-4 tracking-tighter">{seed.title}</h1>
+          <p class="text-lg text-neutral-400 font-serif italic">"{seed.commentary}"</p>
+        </header>
+        <article class="prose prose-invert prose-lg text-neutral-300 max-w-none [&>h2]:font-mono [&>h2]:text-xs [&>h2]:uppercase [&>h2]:tracking-widest [&>h2]:text-amber-500 [&>h2]:mt-16 [&>h2]:mb-6 [&>blockquote]:border-l-amber-500/50 [&>blockquote]:text-amber-200/80 [&>blockquote]:font-mono [&>blockquote]:text-sm [&>hr]:border-neutral-800 [&>p>strong]:text-white">
+          <Content />
+        </article>
+      </main>
+    )}
+
+    {/* --- LAYOUT 9: CHRONICLE --- */}
+    {seed.format === 'chronicle' && (
+      <main class="max-w-3xl mx-auto py-16 px-6">
+        <header class="border-b-4 border-white/10 mb-12 pb-6">
+          <div class="flex justify-between items-end mb-4">
+            <span class="bg-neutral-800 text-neutral-300 font-bold px-2 py-1 text-[10px] uppercase tracking-tighter">Chronicle</span>
+            <span class="font-mono text-[10px] text-neutral-500">{seed.date}</span>
+          </div>
+          <h1 class="text-4xl md:text-6xl font-bold text-white leading-none tracking-tight mb-6">{seed.title}</h1>
+          <p class="text-xl text-neutral-400 font-serif italic pl-6 border-l-2 border-neutral-600">"{seed.commentary}"</p>
+        </header>
+        {seed.mediaUrl && (
+          <div class="mb-12">
+            <img src={seed.mediaUrl} class="w-full h-80 object-cover grayscale rounded-sm" />
+          </div>
+        )}
+        <article class="prose prose-invert prose-lg text-neutral-300 font-serif leading-loose max-w-none [&>h2]:font-sans [&>h2]:text-white [&>hr]:border-neutral-800">
+          <Content />
+        </article>
+      </main>
+    )}
+
+    {/* --- LAYOUT 10: DIALOGUE --- */}
+    {seed.format === 'dialogue' && (
+      <main class="max-w-3xl mx-auto py-20 px-6">
+        <header class="mb-12 text-center">
+          <span class="text-[10px] font-mono text-purple-500 uppercase tracking-[0.4em] block mb-6">Dialectical Exchange</span>
+          <h1 class="text-4xl md:text-6xl font-serif font-bold text-white mb-6 leading-tight">{seed.title}</h1>
+          <p class="text-lg text-neutral-400 font-serif italic">"{seed.commentary}"</p>
+        </header>
+        <article class="prose prose-invert prose-lg text-neutral-300 max-w-none [&>h2]:font-mono [&>h2]:text-sm [&>h2]:uppercase [&>h2]:tracking-widest [&>h2]:text-purple-400 [&>h2]:mt-14 [&>h2]:mb-6 [&>h3]:text-white [&>h3]:font-serif [&>blockquote]:border-l-purple-500/50 [&>blockquote]:text-purple-200/80 [&>hr]:border-neutral-800">
+          <Content />
+        </article>
+      </main>
+    )}
+
+    {/* --- LAYOUT 11: TREATISE --- */}
+    {seed.format === 'treatise' && (
+      <main class="max-w-4xl mx-auto py-20 px-6">
+        <header class="mb-16 border-b border-neutral-800 pb-8">
+          <span class="text-[10px] font-mono text-cyan-500 uppercase tracking-[0.3em] block mb-4">{seed.pillar} — Treatise</span>
+          <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight">{seed.title}</h1>
+          <p class="text-lg text-neutral-400 font-serif italic">"{seed.commentary}"</p>
+        </header>
+        {seed.mediaUrl && (
+          <div class="mb-12 relative group">
+            <img src={seed.mediaUrl} class="w-full h-72 object-cover opacity-50 group-hover:opacity-80 transition-all duration-700 rounded-sm" />
+            <div class="absolute bottom-2 right-2 text-[9px] font-mono text-white/50">FIGURE 1</div>
+          </div>
+        )}
+        <article class="prose prose-invert prose-lg text-neutral-300 max-w-none [&>h2]:font-mono [&>h2]:text-sm [&>h2]:uppercase [&>h2]:tracking-widest [&>h2]:text-cyan-500 [&>h2]:mt-16 [&>h2]:mb-6 [&>h3]:text-white [&>h3]:text-lg [&>blockquote]:border-l-cyan-500/50 [&>blockquote]:text-cyan-200/70 [&>hr]:border-neutral-800 [&>ul]:text-neutral-400 [&>p>strong]:text-white">
+          <Content />
+        </article>
+      </main>
+    )}
+
     {/* --- SHARED FOOTER WITH TAGS --- */}
     <footer class="w-full max-w-4xl mx-auto mt-16 px-6">
       <div class="border-t border-white/10 pt-8">

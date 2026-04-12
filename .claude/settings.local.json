@@ -1,7 +1,17 @@
 {
   "permissions": {
     "allow": [
-      "Bash(grep -E \"\\\\.tsx$|\\\\.css$\")"
+      "Bash(grep -E \"\\\\.tsx$|\\\\.css$\")",
+      "Bash(pandoc \"raw-notes/Physics SOTA Curriculum_ Engines of Reality.docx\" -t plain)",
+      "Bash(pandoc \"Enhancing Music Theory Examples and Depth.docx\" -t plain)",
+      "Bash(pandoc \"Feil krig_ Kunnskap er løsningen.docx\" -t plain)",
+      "Bash(/c/Users/retrolaptop/AppData/Local/Programs/Python/Python311/python -c \"from zipfile import ZipFile; import xml.etree.ElementTree as ET; print\\('Libraries available'\\)\")",
+      "Bash(python3)",
+      "Bash(cd /tmp)",
+      "Bash(unzip -q \"/c/Users/retrolaptop/Documents/GitHub/rhizome-library_claude/raw-notes/Feil krig_ Kunnskap er løsningen.docx\")",
+      "Bash(pip install:*)",
+      "Bash(python3 -c ':*)",
+      "Bash(python -c ':*)"
     ]
   }
 }
