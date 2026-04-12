@@ -35,7 +35,7 @@ const featured = allArticles[0];
         <h2 class="text-2xl font-bold text-white mb-2">{featured.data.title}</h2>
         <p class="text-neutral-400 font-serif italic mb-6">{featured.data.commentary}</p>
         <a
-          href={`/view/${featured.id}`}
+          href={`/view/${featured.slug}`}
           class="inline-block bg-white text-black font-mono text-xs px-4 py-2 hover:bg-blue-500 hover:text-white transition-colors uppercase tracking-wider"
         >
           View Artifact →

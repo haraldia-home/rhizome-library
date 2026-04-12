@@ -14,7 +14,7 @@ const { title = 'The Living Library' } = Astro.props;
 // Fetch all articles for client-side search data
 const allArticles = await getCollection('articles');
 const searchData = allArticles.map((entry) => ({
-  slug: entry.id,
+  slug: entry.slug,
   title: entry.data.title,
   pillar: entry.data.pillar,
   format: entry.data.format,
